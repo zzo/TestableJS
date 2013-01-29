@@ -1,0 +1,19 @@
+var casper = require('casper').create();
+casper.start('http://search.yahoo.com/', function() {
+    this.fill('form#sf', { "p": 'JavaScript' }, false);
+    this.click('#yschbt');
+});
+casper.then(function() {
+    this.capture('results.png', {
+        top: 0,
+        left: 0,
+        width: 1024,
+        height: 768
+    });
+
+this.test.assertExists('#resultCount', 'Got result count');
+});
+
+casper.run(function() {
+    this.test.renderResults(true, 0, 'test-results.xml');
+});

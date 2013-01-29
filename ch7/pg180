@@ -1,0 +1,14 @@
+function getIterator(countBy, startAt, upTill) {
+    countBy = countBy || 1;
+    startAt = startAt || 0;
+    upTill = upTill || 100;
+    var current = startAt
+        , ret = function() {
+            current += countBy;
+            return (current > upTill) ? NaN : current;
+        }
+    ;
+
+    ret.displayName = "Iterator from " + startAt + " until " + upTill + " by " countBy;
+    return ret;
+}

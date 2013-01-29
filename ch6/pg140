@@ -1,0 +1,16 @@
+var webdriverjs = require("webdriverjs")
+    , browser = webdriverjs.remote({
+        host: 'localhost'
+        , port: 4444
+        , desiredCapabilities: { browserName: 'firefox' }
+    })
+;
+
+browser
+    .testMode()
+    .init()
+    .url("http://search.yahoo.com")
+    .setValue("#yschsp", "JavaScript")
+    .submitForm("#sf")
+    .tests.visible('#resultCount', true, 'Got result count')
+    .end();

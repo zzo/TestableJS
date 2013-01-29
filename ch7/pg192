@@ -1,0 +1,36 @@
+function connectToDebugger(obj, ready) {
+    var fs = require('fs')
+        , WebSocket = require('faye-websocket')
+        , ws = new WebSocket.Client(obj.webSocketDebuggerUrl)
+        , msg = {
+            id: 777
+            , method: "Timeline.start"
+            , params: {
+                maxCallStackDepth: 10
+            }
+        }
+        , messages = ''
+    ;
+
+    ws.onopen = function(event) {
+        ws.send(JSON.stringify(msg));
+        ready();
+    };
+
+    ws.onmessage = function(event) {
+        var obj = JSON.parse(event.data);
+        if (obj.method && obj.method === 'Timeline.eventRecorded') {
+            obj.record = obj.params.record; // Zany little hack
+            messages += JSON.stringify(obj) + '\n';
+        }
+    };
+
+    ws.onclose = function(event) {
+        var header = '<html isdump="true">\n<body><span id="info">'
+                + '</span>\n<div id="traceData" isRaw="true" version="0.26">'
+            , footer = '</div></body></html>'
+        ;
+
+        ws = null;
+        fs.writeFileSync('DUMP.speedtracer.html', header + messages + footer, 'utf8');
+    };

@@ -1,0 +1,11 @@
+function createClosure() {
+    var bigHairyVariable = { ... }, wow = 'wow';
+    return {
+        a: bigHairyVariable
+        , b: wow
+        , c: 87
+        , d: function() { return bigHairyVariable; }
+    };
+}
+// never use global.a - wasted a lot of memory - a leak?
+var global = createClosure();

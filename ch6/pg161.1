@@ -1,0 +1,7 @@
+var reporting = require('nodeload/lib/reporting')
+    , report = reporting.REPORT_MANAGER.getReport('System Usage')
+    , memChart = report.getChart('Memory Usage')
+    , cpuChart = report.getChart('CPU Usage')
+    , loop = require('nodeload/lib/loop')
+    , fs = require('fs')
+;

@@ -1,0 +1,6 @@
+function getMemory() {
+    var memData = getProc('meminfo', /\s*kb/i);
+    memChart.put({ 'Free Memory': memData['MemFree'] , 'Free Swap': memData['SwapFree'] });
+    report.summary['Total Memory'] = memData['MemTotal'];
+    report.summary['Total Swap'] = memData['SwapTotal'];
+}

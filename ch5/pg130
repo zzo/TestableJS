@@ -1,0 +1,10 @@
+my $old = '/a/b/c';
+my $new = '/d/e/f';
+open(F, "wrong.lcov");
+open(G, ">right.lcov");
+while(<F>) {
+    s#^$old#$new#;
+    print G;
+}
+close(G);
+close(F);

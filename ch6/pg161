@@ -1,0 +1,12 @@
+var myLoop = new loop.Loop(
+    function(finished, args) {
+        getMemory();
+        getCPU();
+        finished();
+    }
+    , [] // No args
+    , [] // No conditions
+    , .2 // Once every 5 seconds
+);
+
+myLoop.start();

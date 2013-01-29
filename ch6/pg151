@@ -1,0 +1,18 @@
+var Proxy = require('browsermob-proxy').Proxy
+    , spawn = require('child_process').spawn
+    , fs = require('fs')
+;
+
+var proxy = new Proxy();
+proxy.selHAR('MyCoolHARFile', doCasperJSStuff, function(err, data) {
+    if (err) {
+        console.error('ERR: ' + err);
+    } else {
+        fs.writeFileSync('casper.har', data, 'utf8');
+    }
+});
+
+function doCasperJSStuff(proxy, cb) {
+    casperjs = spawn('bin/casperjs' , [ '--proxy=' + proxy, process.argv[2] ]);
+    casperjs.on('exit', cb);
+}

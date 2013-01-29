@@ -1,0 +1,10 @@
+function getIterator(countBy, startAt, upTill) {
+    countBy = countBy || 1;
+    startAt = startAt || 0;
+    upTill = upTill || 100;
+    var current = startAt;
+    return function() {
+        current += countBy;
+        return (current > upTill) ? NaN : current;
+    };
+}

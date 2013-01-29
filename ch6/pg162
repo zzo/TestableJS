@@ -1,0 +1,13 @@
+function getCPU() {
+    var meminfo = fs.readFileSync('/proc/loadavg', 'utf8')
+        , vals = meminfo.split(/\s+/)
+        , cpuInfo = getProc('cpuinfo')
+        ;
+
+    cpuChart.put( {
+        '1 Min': vals[0]
+        , '5 Min': vals[1]
+        , '15 Min': vals[2]
+    });
+    report.summary['CPU'] = cpuInfo['model name'];
+}

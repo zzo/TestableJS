@@ -1,0 +1,7 @@
+var tempFile = PATH.join(coverageBase, PATH.basename(file));
+    , realFile = require.resolve(file)
+;
+exec('java -jar ' + coverageJar + " -o " + tempFile + " " + realFile
+    , function(err) {
+        FILES_FOR_COVERAGE[keep] = 1;
+});

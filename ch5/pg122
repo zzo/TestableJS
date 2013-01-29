@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+use CGI;
+my $q = CGI->new;
+my $file = $q->param('file');
+system("java -jar /path/to/yuitest_coverage.jar -o /tmp/$$.js $file");
+print $q->header('application/JavaScript');
+open(C, "/tmp/$$.js");
+print <C>;

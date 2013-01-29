@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{QUERY_STRING} coverage=1
+RewriteRule ^(.*)$ make_coverage.pl?file=%{DOCUMENT_ROOT}/$1 [L]

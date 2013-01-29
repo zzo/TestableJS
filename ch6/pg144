@@ -1,0 +1,11 @@
+var casper = require('casper').create();
+casper.start('http://search.yahoo.com/', function() {
+    this.fill('form#sf', { "p": 'JavaScript' }, false);
+    this.click('#yschbt');
+});
+casper.then(function() {
+    this.test.assertExists('#resultCount', 'Got result count');
+});
+casper.run(function() {
+    this.exit();
+});

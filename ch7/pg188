@@ -1,0 +1,15 @@
+var pDebug = require('pDebug').pDebug
+    , debug = new pDebug({ eventHandler: function(event) {
+        console.log('Event'); console.log(event); } }
+    )
+    ;
+
+    debug.connect(function() {
+        var msg = { command: 'continue' };
+        debug.send(msg, function(req, resp) {
+            console.log('REQ: ');
+            console.log(req);
+            console.log('RES: ');
+            console.log(resp);
+        });
+    });

@@ -1,0 +1,11 @@
+function getResults(data) {
+    // Use JUnitXML format for unit test results
+    var reporter = new Y.Test.Reporter(
+        "http://www.yourserver.com/path/to/target"
+        , Y.Test.Format.JUnitXML);
+
+    // Toss in coverage results
+    reporter.addField("coverageResults", Y.Test.Runner.getCoverage(Y.Coverage.Format.JSON));
+    // Ship it
+    reporter.report(results);
+}

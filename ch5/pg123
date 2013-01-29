@@ -1,0 +1,22 @@
+var Module = require('module')
+    , path = require('path')
+    , originalLoader = Module._load
+    , coverageBase = '/tmp'
+    , COVERAGE_ME = []
+;
+
+Module._load = coverageLoader;
+
+// Figure out what files to generate code coverage for
+// & put into COVERAGE_ME
+// And run those JS files thru yuitest-coverage.jar
+// and dump the output into coverageBase
+// Then execute tests
+// All calls to 'require' will filter thru this:
+function coverageLoader(request, parent, isMain) {
+    if (COVERAGE_ME[request]) {
+        request = PATH.join(coverageBase, path.basename(request));
+    }
+    return originalLoader(request, parent, isMain);
+}
+// At the end dump the global _yuitest_coverage variable

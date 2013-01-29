@@ -1,0 +1,41 @@
+#!/usr/bin/perl
+
+# Passed from SVN
+my $REPO = shift;
+my $TXN = shift;
+
+# Set up PATH
+$ENV{PATH} = "$ENV{PATH}:/usr/bin:/usr/local/bin";
+
+# The log message
+my @logmsg = `svnlook log -t "$TXN" "$REPO"`;
+#print STDERR @logmsg;
+
+# Get file changeset
+my @changes = `svnlook changed --transaction "$TXN" "$REPO"`;
+my $failed = 0;
+#print STDERR @changes;
+
+# Find JS files
+foreach (@changes) {
+    my($cmd, $file) = split(/\s+/);
+    # Only JSLint *.js files that haven't been deleted!
+    if ($file =~ /\.js$/ && $cmd ne 'D') {
+        # Text of changed file:
+        # my @cat = `svnlook cat "$REPO" --transaction "$TXN" $file`;
+        # OR just grab the pre-committed file itself directly
+        # This script runs from the directory of the commit itself so
+        # these relative paths are the uncommitted versions
+        my @jslint = `/usr/local/bin/jslint $file`;
+        if ($?) {
+            print STDERR '-' x 20, "\n";
+            print STDERR "JSLint errors in $file:\n";
+            print STDERR '-' x 20;
+            print STDERR @jslint;
+            $failed++;
+        }
+    }
+}
+
+# STDERR goes back to client if failed
+exit $failed;

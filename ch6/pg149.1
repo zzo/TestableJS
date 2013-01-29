@@ -1,0 +1,49 @@
+var Proxy = require('browsermob-proxy').Proxy
+    , webdriverjs = require("webdriverjs")
+    , fs = require('fs')
+    , proxy = new Proxy()
+;
+
+/*
+* Call into the proxy with a 'name' for this session, a Selenium
+* function to run the interaction we want to capture, and
+* finally a callback that will contain either the HAR data or
+* an error
+*/
+proxy.cbHAR('search.yahoo.com', doSeleniumStuff, function(err, data) {
+if (err) {
+    console.error('Error capturing HAR: ' + err);
+} else {
+    fs.writeFileSync('search.yahoo.com.har', data, 'utf8');
+}
+});
+
+/*
+* This is the Selenium function that gets passed the proxy webdriverjs
+* should use and a callback to call when the interaction is done
+*/
+function doSeleniumStuff(proxy, cb) {
+    var browser = webdriverjs.remote({
+        host: 'localhost'
+        , port: 4444
+        , desiredCapabilities: {
+            browserName: 'firefox'
+            , seleniumProtocol: 'WebDriver'
+            , proxy: { httpProxy: proxy }
+        }
+    });
+
+    // Just run our regular Selenium stuff - note this can just
+    // be your regular test code or something special you want
+    // to capture with a HAR
+    // Just pass the browsermob-proxy callback to 'end()'
+    browser
+        .testMode()
+        .init()
+        .url("http://search.yahoo.com")
+        .setValue("#yschsp", "JavaScript")
+        .submitForm("#sf")
+        .tests.visible('#resultCount', true, 'Got result count')
+        .saveScreenshot('results.png')
+        .end(cb);
+}

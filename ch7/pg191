@@ -1,0 +1,17 @@
+function startCapture(ready) {
+    var http = require('http')
+        , options = {
+            host: 'localhost'
+            , port: 9222
+            , path: '/json'
+        }
+    ;
+
+    http.get(options, function(res) {
+        res.on('data', function (chunk) {
+            var resObj = JSON.parse(chunk);
+            connectToDebugger(resObj[0], ready);
+        });
+    }).on('error', function(e) {
+        console.log("Got error: " + e.message);
+    }

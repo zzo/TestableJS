@@ -1,0 +1,24 @@
+var soda = require('soda')
+    , browser = soda.createClient({
+        url: 'http://search.yahoo.com'
+        , host: 'localhost'
+        , browser: 'safari'
+    })
+;
+
+browser
+    .chain
+    .session()
+    .open('/')
+    .type('yschsp', 'JavaScript')
+    .submit('sf')
+    .waitForPageToLoad(5000)
+    .assertElementPresent('resultCount')
+    .end(function(err) {
+    browser.testComplete(function() {
+        if (err) {
+            console.log('Test failures: ' + err);
+        } else {
+            console.log('success!');
+        }
+    })

@@ -1,0 +1,39 @@
+#!/usr/local/bin/perl
+use Getopt::Long;
+use File::Find;
+use File::Basename;
+
+my($debug, $test_dir, @src_dir, $src_base);
+my $src_key = 'src'; // root of source tree
+
+GetOptions (
+    "test_dir=s" => \$test_dir,
+    132 | Chapter 5: Code Coverage
+    "src_dir=s" => \@src_dir,
+    "src_base=s" => \$src_base,
+) || die "Bad Options!\n";;
+
+my $src_files = {};
+find(\&all_src_files, @src_dir);
+find(\&all_tested_files, $test_dir);
+
+sub all_src_files {
+    return unless (/\.js$/);
+    foreach my $src_dir (@src_dir) {
+        $File::Find::name =~ s/^\Q$src_base\E//;
+    }
+    $src_files->{$File::Find::name}++;
+}
+
+sub all_tested_files {
+    return unless (/\.html?$/);
+    open(F, $_) || die "Can't open $_: $!\n";
+    while(my $line = <F>) {
+        if ($line =~ /["']([^"]+?\/($src_key\/[^"]+?\.js))["']/) {
+            my($full_file_path) = $2;
+            print "Test file $File::Find::name is coveraging
+            $full_file_path\n" if ($debug);
+            delete $src_files->{$full_file_path};
+        }.
+    }
+}

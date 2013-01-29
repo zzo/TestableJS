@@ -1,0 +1,9 @@
+var TestRunner = Y.Test.Runner;
+TestRunner.subscribe(TestRunner. TEST_SUITE_COMPLETE_EVENT, getResults);
+TestRunner.run();
+function getResults(data) {
+    var reporter = new Y.Test.Reporter(
+        "http://www.yourserver.com/path/to/target"
+        , Y.Test.Format.JUnitXML);
+    reporter.report(results);
+}

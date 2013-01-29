@@ -1,0 +1,14 @@
+testPriceError: function() {
+    var symbol = 'YHOO'
+        , _this = this
+        , http = new myhttp()
+    ;
+
+    getPrice(symbol, function(err, price) {
+    _this.resume(function() {
+        Y.Assert.areEqual(err, 'an error', "Did not get error!"); }, http);
+        http.fire('error', { message: 'an error'} );
+        this.wait(1000);
+    }
+}
+    

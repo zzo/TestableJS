@@ -1,0 +1,15 @@
+/**
+* A simple stub for HTTP object
+*/
+var events = require('events').EventEmitter
+    , util = require('util')
+    , myhttp = function() { // Dummy up NodeJS's 'http' object
+        var _this = this ;
+        events.call(this);
+        this.get = function(options, cb) {
+            cb(_this);
+            return _this;
+        };
+    }
+;
+util.inherits(myhttp, events);

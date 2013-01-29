@@ -1,0 +1,4 @@
+var realFile = require.resolve(file)
+    , coverFile = realFile.replace('.js', '.cover');
+;
+exec('java -jar ' + coverageJar + " -o " + coverFile + " " + realFile, function(err) {});

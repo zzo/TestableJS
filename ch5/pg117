@@ -1,0 +1,15 @@
+testPrice: function() {
+    var symbol = 'YHOO'
+        , stockPrice = 50 // Wishful thinking??
+        , _this = this
+        , http = new myhttp()
+    ;
+
+    getPrice(symbol, function(err, price) {
+        _this.resume(function() {
+            Y.Assert.areEqual(stockPrice, price, "Prices not equal!");
+        }, http); // Inject our 'http' object
+        http.fire('data', stockPrice); // Our mock data
+        this.wait(1000);
+    }
+}

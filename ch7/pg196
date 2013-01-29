@@ -1,0 +1,17 @@
+// Open page from the command line in PhantomJS
+var page = new WebPage();
+page.onError = function (msg, trace) {
+    console.log(msg);
+    trace.forEach(function(item) {
+        console.log(' ', item.file, ':', item.line);
+    })
+}
+
+page.open(phantom.args[0], function (status) {
+    // Check for page load success
+    if (status !== "success") {
+        console.log("Unable to access network");
+    } else {
+        setInterval(function() {}, 200000);
+    }
+});

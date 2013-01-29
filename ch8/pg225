@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+
+# Get file list
+my @files = `git diff --cached --name-only HEAD`;
+my $failed = 0;
+foreach (@files) {
+    # Check *.js files only
+    if (/\.js$/) {
+        my @style = `jscheckstyle --violations $_`;
+        if ($?) {
+            # Send pretty error output to client
+            print @style;
+            $failed++;
+        }
+    }
+}
+exit $failed;

@@ -1,0 +1,27 @@
+/**
+* Return current stock price for given symbol
+* in the callback
+*
+* @method getPrice
+* @param symbol <String> the ticker symbol
+* @param cb <Function> callback with results cb(error, value)
+* @param httpObj <HTTP> Optional HTTP object for injection
+* @return nothing
+**/
+function getPrice(symbol, cb, httpObj) {
+    var http = httpObj || require('http')
+        , options = {
+            host: 'download.finance.yahoo.com' // Thanks Yahoo!
+            , path: '/d/quotes.csv?s=' + symbol + '&f=l1'
+        }
+    ;
+
+    http.get(options, function(res) {
+        res.on('data', function(d) {
+            cb(null, d);
+        });
+    }).on('error', function(e) {
+        cb(e.message);
+    });
+}
+

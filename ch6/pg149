@@ -1,0 +1,12 @@
+var Proxy = require('browsermob-proxy').Proxy
+    , fs = require('fs')
+    , proxy = new Proxy()
+;
+
+proxy.doHAR('http://yahoo.com', function(err, data) {
+    if (err) {
+        console.error('ERROR: ' + err);
+    } else {
+        fs.writeFileSync('yahoo.com.har', data, 'utf8');
+    }
+});
