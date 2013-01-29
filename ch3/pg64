@@ -1,0 +1,8 @@
+var suite = new Y.Test.Suite('login');
+suite.add(testCase);
+Y.Test.Runner.add(suite);
+//Initialize the console
+new Y.Console({
+    newestOnTop: false
+}).render('#log');
+Y.Test.Runner.run();

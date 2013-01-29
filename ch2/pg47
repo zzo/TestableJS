@@ -1,0 +1,4 @@
+knit.inject(function(ShuttleDiscovery, ShuttleEndeavor, Pad) {
+    ShuttleDiscovery.blastOff(Pad);
+    ShuttleEndeavor.blastOff(Pad);
+});

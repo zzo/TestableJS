@@ -1,0 +1,5 @@
+eventHub.on('eventClient:done', function(event) {
+    console.log('DONE LISTENING FOR ' + event);
+    // finish handling any outstanding events & then safely:
+    process.exit(0);
+});

@@ -1,0 +1,10 @@
+knit = require('knit');
+knit.config(function (bind) {
+    bind('MainEngine').to(SpaceShuttleMainEngine).is("construtor");
+    bind('BoosterEngine1').to(SpaceShuttleSolidRocketBooster).is("constructor");
+    bind('BoosterEngine2').to(SpaceShuttleSolidRocketBooster).is("constructor");
+    bind('Arm').to(ShuttleRemoteManipulatorSystem).is("constructor");
+    bind('ShuttleDiscovery').to(SpaceShuttle).is("constructor");
+    bind('ShuttleEndeavor').to(SpaceShuttle).is("constructor");
+    bind('Pad').to(new LaunchPad()).is("singleton");
+});

@@ -1,0 +1,11 @@
+// somewhere on server
+eventHub.on('REGISTER_USER', function(obj) {
+    // stick obj.name into user DB
+    eventHub.fire('USER_REGISTERED', { name: obj.name });
+});
+// somewhere global
+eventHub.on('USER_REGISTERED', function(user) {
+    console.log(user.name + ' registered!');
+});
+// somewhere specific
+eventHub.fire('REGISTER_USER', { name: 'mark' });

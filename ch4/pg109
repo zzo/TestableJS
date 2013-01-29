@@ -1,0 +1,30 @@
+var mockery = require('mockery');
+
+mockery.enable();
+
+describe("Sum suite File", function() {
+    beforeEach(function() {
+        mockery.registerAllowable('./mySumFS', true);
+    });
+
+    afterEach(function() {
+        mockery.deregisterAllowable('./mySumFS');
+    });
+
+    it("Adds Integers!", function() {
+        var filename = "numbers"
+            , fsMock = {
+                readFileSync: function (path, encoding) {
+                    expect(path).toEqual(filename);
+                    expect(encoding).toEqual('utf8');
+                    return JSON.stringify({ a: 9, b: 3 });
+                }
+            }
+        ;
+
+        mockery.registerMock('fs', fsMock);
+        var mySum = require('./mySumFS');
+        expect(mySum.sum(filename)).toEqual(12);
+        mockery.deregisterMock('fs');
+    });
+});

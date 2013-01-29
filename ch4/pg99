@@ -1,0 +1,17 @@
+YUI().add('phantomjs', function(Y) {
+    var yconsole = new Y.Console();
+    yconsole.on('entry',
+        function(obj) {
+            console.log(JSON.stringify(obj.message));
+        }
+    );
+
+    if (typeof(console) !== 'undefined') {
+        var TR = Y.Test.Runner;
+        TR.subscribe(TR.COMPLETE_EVENT, function(obj) {
+            console.log(JSON.stringify(
+                { results: Y.Test.Format.JUnitXML(obj.results) }));
+            }
+        );
+    }
+}, '1.0', { requires: [ 'console' ] });

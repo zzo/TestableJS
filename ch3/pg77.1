@@ -1,0 +1,13 @@
+<script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/clients/browser/yui3.js"></script>
+<script>
+    YUI().use('node', 'EventHub', function(Y) {
+    var hub = new Y.EventHub(io, 'http://myhost:5883');
+    hub.on('eventHubReady', function() {
+        hub.on('ADD_USER_DONE', function(data) { });
+        ... TIME PASSES ...
+        hub.fire('ADD_USER', user);
+    });
+});
+</script>

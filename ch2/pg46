@@ -1,0 +1,6 @@
+var SpaceShuttle = function() {
+    this.mainEngine = new SpaceShuttleMainEngine();
+    this.boosterEngine1 = new SpaceShuttleSolidRocketBooster();
+    this.boosterEngine2 = new SpaceShuttleSolidRocketBooster();
+    this.arm = new ShuttleRemoteManipulatorSystem();
+};

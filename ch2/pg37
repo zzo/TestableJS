@@ -1,0 +1,7 @@
+function makeChickenDinner(ingredients, cooker, chicken, mixer) {
+    var dish = mixer.mix(chicken, ingredients);
+    return cooker.bake(dish
+        , cooker.degrees_f(350)
+        , cooker.timer('50 minutes')
+    );
+}

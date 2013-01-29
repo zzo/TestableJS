@@ -1,0 +1,19 @@
+// Somewhere on the server
+eventHub.on('ADD_TO_CART'
+    , function(userId, itemId, callback) {
+        d.cart.push(itemId);
+        callback(null, { items: userId.cart.length });
+    }
+);
+
+// Meanwhile, somewhere else (in the browser, probably)
+function addItemToCart(userId, itemId) {
+    eventHub.fire('ADD_TO_CART'
+        , { user_id: userId, item_id: itemId }
+        , function(err, result) {
+            if (!err) {
+                console.log('Cart now has: ' + result.cart.items + ' items');
+            }
+        }
+    );
+}

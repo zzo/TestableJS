@@ -1,0 +1,22 @@
+YUI().add('login', function(Y) {
+    Y.one('#submitButton').on('click', logIn);
+    function logIn(e) {
+        var username = Y.one('#username').get('value')
+            , password = Y.one('#password').get('value')
+        ;
+
+        eventHub.fire('logIn'
+            , { username: username, password: password }
+            , function(err, resp) {
+                if (!err) {
+                    if (resp.loginOk) {
+                        userLoggedIn(username);
+                    } else {
+                        failedLogin(username);
+                    }
+                } else {
+                    networkError(err);
+                }
+            });
+    }
+}, '1.0', { requires: [ 'node', 'EventHub' ] });

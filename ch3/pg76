@@ -1,0 +1,4 @@
+eventHub.on('eventClient:done', function(event) {
+    console.log('I have been advised to stop listening for event: ' + event);
+    eventHub.removeAllListeners(event);
+});

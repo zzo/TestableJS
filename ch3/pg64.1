@@ -1,0 +1,15 @@
+YUI().use('test', 'console', 'node-event-simulate' , 'login', function(Y) {
+
+    // Factory for mocking EH
+    var getFakeEH = function(args) {
+        return {
+            fire: function(event, eventArgs, cb) {
+                Y.Assert.areEqual(event, args.event);
+                Y.Assert.areEqual(JSON.stringify(eventArgs),
+                JSON.stringify(args.data));
+                Y.Assert.isFunction(cb);
+                cb(args.err, args.responseArg);
+            }
+        };
+    };
+});

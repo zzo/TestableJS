@@ -1,0 +1,47 @@
+describe("test make dinner", function() {
+    // Mocks
+    Food = function(obj) {};
+    Food.prototype.attr = {};
+    MixedFood = function(args) {
+        var obj = Object.create(Food.prototype);
+        obj.attr.isMixed = true; return obj;
+    };
+
+    CookedFood = function(dish) {
+        var obj = Object.create(Food.prototype);
+        obj.attr.isCooked = true; return obj;
+    };
+
+    FDegrees = function(temp) { this.temp = temp };
+    Meal = function(dish) { this.dish = dish };
+    Timer = function(timeSpec) { this.timeSpec = timeSpec; };
+    ChickenBreast = function() {
+        var obj = Object.create(Food.prototype);
+        obj.attr.isChicken = true; return obj;
+    };
+    ConventionalOven = function() {
+        this.bake = function(dish, degrees, timer) {
+            return new CookedFood(dish, degrees, timer);
+        };
+    };
+    Mixer = function() {
+        this.mix = function(chicken, ingredients) {
+            return new MixedFood(chicken, ingredients);
+        };
+    };
+    Ingredients = function(ings) { this.ings = ings; };
+    // end Mocks
+
+    it("cooked dinner", function() {
+        this.addMatchers({
+            toBeYummy: function(expected) {
+                return this.actual.attr.isCooked && this.actual.attr.isMixed;
+            }
+        });
+
+        var ingredients = new Ingredients('parsley', 'salt')
+            , dinner = makeChickenDinner(ingredients)
+        ;
+        expect(dinner).toBeYummy();
+    });
+});

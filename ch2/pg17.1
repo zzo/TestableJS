@@ -1,0 +1,7 @@
+var obj = { realRoot : '/somewhere' };
+Object.defineProperty(obj, 'docRoot', {
+    enumerable: true
+    , set: function(value) {
+        validateDocRoot(value); this.realRoot = value; }
+    }
+);

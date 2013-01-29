@@ -1,0 +1,19 @@
+describe("configure tests", function() {
+    it("undef if docRoot does not exist", function() {
+        expect(configure({ docRoot: '/xxx' })).toBeUndefined();
+    });
+    it("not undef if docRoot does exist", function() {
+        expect(configure({ docRoot: '/tmp' })).not.toBeUndefined();
+    });
+    it("adds values to config hash", function() {
+        var config = configure({ docRoot: '/tmp', zany: 'crazy' });
+        expect(config).not.toBeUndefined();
+        expect(config.zany).toEqual('crazy');
+        expect(config.docRoot).toEqual('/tmp');
+    });
+    it("verifies value1 good...", function() {
+    });
+    it("verifies value1 bad...", function() {
+    });
+// ...
+});

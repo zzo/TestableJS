@@ -1,0 +1,27 @@
+YUI().add('login', function(Y) {
+    Y.one('#submitButton').on('click', logIn);
+    function logIn(e) {
+        var username = Y.one('#username').get('value')
+            , password = Y.one('#password').get('value')
+            , cfg = {
+                data: JSON.stringify({username: username, password: password })
+                , method: 'POST'
+                , on: {
+                    complete: function(tid, resp, args) {
+                        if (resp.status === 200) {
+                            var response = JSON.parse(resp.responseText);
+                            if (response.loginOk) {
+                                userLoggedIn(username);
+                            } else {
+                                failedLogin(username);
+                            }
+                        } else {
+                            networkError(resp);
+                        }
+                    }
+                }
+            }
+            , request = Y.io('/login', cfg)
+        ;
+    }
+}, '1.0', { requires: [ 'node', 'io-base' ] });

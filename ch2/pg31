@@ -1,0 +1,9 @@
+YUI.use('myModule', function(Y) {
+    var myModule = function() {
+        this.a = new Y.A();
+        this.b = new Y.B();
+        this.c = new Y.C();
+    };
+
+    Y.MyModule = myModule;
+}, { requires: [ 'a', 'b', 'c' ] });

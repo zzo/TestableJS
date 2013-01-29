@@ -1,0 +1,26 @@
+function Cooker(oven) {
+    this.oven = oven;
+}
+
+Cooker.prototype.bake = function(dish, deg, timer) {
+    return this.oven.bake(dish, deg, timer);
+};
+
+Cooker.prototype.degrees_f = function(deg) {
+    return new FDegrees(deg);
+};
+
+Cooker.prototype.timer = function(time) {
+    return new Timer(time);
+};
+
+function makeChickenDinner(ingredients, cooker) {
+    var chicken = new ChickenBreast()
+        , mixer = new Mixer()
+        , dish = mixer.mix(chicken, ingredients)
+    ;
+    return cooker.bake(dish , cooker.degrees_f(350) , cooker.timer("50 minutes"));
+}
+
+var cooker = new Cooker(new ConventionalOven())
+    , dinner = makeChickenDinner(ingredients, cooker);

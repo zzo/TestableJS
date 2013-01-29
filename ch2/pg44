@@ -1,0 +1,9 @@
+var AbstractTableClothFactory = {
+    getFactory: function(kind) {
+        if (kind !== 'TEST') {
+            return TableClothFactory;
+        } else {
+            return TableClothTestFactory;
+        }
+    }
+};

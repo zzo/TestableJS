@@ -1,0 +1,8 @@
+function addToShoppingCart(item) {
+    if (item.inStock()) {
+        this.cart.push(item);
+        return item;
+    } else {
+        return null;
+    }
+}

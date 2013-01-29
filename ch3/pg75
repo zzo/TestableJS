@@ -1,0 +1,4 @@
+eventSwitch.on('depositMoney', function(data) {
+    cash += data.depositAmount;
+    eventSwitch.emit('depositedMoney', cash);
+}, { type: 'unicast' });

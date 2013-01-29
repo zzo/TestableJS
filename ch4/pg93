@@ -1,0 +1,13 @@
+, testWithSpy: function() {
+    var origSum = sum
+        , sumSpy = function(a, b) {
+            Y.Assert.areSame(a, 2, 'first arg is 2!');
+            Y.Assert.areSame(a, 9, 'second arg is 9!');
+            return origSum(a, b);
+        }
+    ;
+
+    sum = sumSpy;
+    Y.Assert.areSame(sum(2, 9), 11 , '2 + 9 does not equal 11?');
+    sum = origSum; // reset it (or use teardown)
+}

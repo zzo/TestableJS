@@ -1,0 +1,14 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>User View Tests</title>
+    </head>
+    <body class="yui3-skin-sam">
+        <h1>Test User View</h1>
+        <div id="log" />
+        <script src="http://yui.yahooapis.com/3.4.0/build/yui/yui-min.js"></script>
+        <script src="../../../src/frontend/user/userView.js"></script>
+        <script src="test_user_view.js"></script>
+    </body>
+</html>

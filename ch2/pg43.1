@@ -1,0 +1,5 @@
+var TableClothFactory = {
+    getTableCloth: function(color) {
+        return Object.create(TableCloth, { color: { value: color }});
+    }
+};

@@ -1,0 +1,11 @@
+testAsync: function () {
+    var test = this, myButton = Y.one('#button');
+    myButton.on('click', function() {
+        this.resume(function() {
+            Y.Assert.isTrue(true, 'You sunk my battleship!');
+        });
+    }
+
+    myButton.simulate('click');
+    this.wait(2000);
+}

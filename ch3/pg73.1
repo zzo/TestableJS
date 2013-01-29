@@ -1,0 +1,3 @@
+var clickEvent = hub.addEvent('click');
+clickEvent.on(function(data) { /* got a click event! */ });
+clickEvent.fire({ button: 'clicked' }); // fired a click event!

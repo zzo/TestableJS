@@ -1,0 +1,26 @@
+YUI().use('test', function(Y) {
+    var addUserTests = new Y.Test.Case({
+        name: 'add user'
+        , addOne: function() {
+            var user = { user_id: 'mark' }
+                , dbHandle = { // DB stub
+                    addRow: function(user) {
+                        return { user: user
+                                , success: true
+                                , message: 'ok' };
+                    }
+                }
+                , result
+            ;
+
+            DB(dbHandle); // Inject test versions
+            result = addUser(user);
+            Y.Assert.areSame(result.user, user.user);
+            Y.Assert.isTrue(result.success);
+            Y.Assert.areSame(result.message, 'ok');
+        }
+    });
+
+    Y.Test.Runner.add(addUserTests);
+    Y.Test.Runner.run();
+});

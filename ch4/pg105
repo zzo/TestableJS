@@ -1,0 +1,36 @@
+var webdriverjs = require("webdriverjs")
+    , url
+    , browser = webdriverjs.remote({
+        host: 'localhost'
+        , port: 4444
+        , desiredCapabilities: { browserName: 'firefox' }
+    })
+;
+
+browser.init().url(url).waitFor('#testresults', 10000, function(found) {
+    if (found) {
+        var res = browser.getText('#testresults'
+            , function(text) {
+                // Get log messages and JUnit XML results
+                console.log(JSON.parse(unescape(text.value)));
+                // Now take the snapshot
+                browser.screenshot(
+                    function(screenshot) {
+                        var fs = require('fs')
+                            , filename = 'snapshot.png'
+                            , imageData
+                        ;
+
+                    try {
+                        imageData = new Buffer(screenshot.value , 'base64');
+                        fs.writeFileSync(filename, imageData);
+                    } catch(e) {
+                        console.log('Error getting snapshot: ' + e);
+                    }
+                }
+            );
+        });
+    } else {
+        console.log('TEST RESULTS NOT FOUND');
+    }
+}).end();

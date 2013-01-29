@@ -1,0 +1,7 @@
+var EventHub = require('EventHub/clients/server/eventClient.js');
+    , eventHub = EventHub.getClientHub('http://localhost:5883');
+
+eventHub.on('ADD_USER', function(user) {
+    // Add user logic
+    eventHub.fire('ADD_USER_DONE', { success: true, user: user });
+});

@@ -1,0 +1,15 @@
+// Return an object with 'on' and 'fire' functions for the specified
+// eventName
+hub.addEvent = function(eventName) {
+    var _this = this;
+    this.events[eventName] = {
+        on: function(callback) {
+            _this.on.call(_this, eventName, callback);
+        }
+        , fire: function() {
+            Array.prototype.unshift.call(arguments, eventName);
+            this.fire.apply(_this, arguments);
+        }
+    };
+    return this.events[eventName];
+};

@@ -1,0 +1,16 @@
+function dinnerParty(guests) {
+    var table = new Table()
+        , invitations = new Invitations()
+        , food = new Ingredients()
+        , chef = new Chef()
+        , staff = new Staff()
+        , cloth = new FancyTableClothWithFringes()
+        , dishes = new ChinaWithBlueBorders()
+        , dinner
+    ;
+
+    invitations.invite(guests);
+    table.setTable(cloth, dishes);
+    dinner = chef.cook(ingredients);
+    staff.serve(dinner);
+}

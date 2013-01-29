@@ -1,0 +1,34 @@
+var testCase = new Y.Test.Case({
+    name: "test eh login"
+        , testLogin : function () {
+            var username = 'mark'
+                , password = 'rox'
+            ;
+
+            eventHub = getFakeEH({
+                event: 'logIn'
+                , data: {
+                    username: username
+                    , password: password
+                }
+                , responseArg: { loginOk: true }
+            });
+
+            userLoggedIn = function(user) {
+                Y.Assert.areEqual(user, username);
+            };
+
+            failedLogin = function() {
+                Y.Assert.fail('login should have succeeded!');
+            };
+
+            networkError = function() {
+                Y.Assert.fail('login should have succeeded!');
+            };
+
+            Y.one('#username').set('value', username);
+            Y.one('#password').set('value', password);
+            Y.one('#submitButton').simulate('click');
+        }
+    }
+);

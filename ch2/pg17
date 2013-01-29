@@ -1,0 +1,16 @@
+var fields {
+    docRoot: { validator: validateDocRoot, default: '/somewhere' }
+         , somethingElse: { validator: validateSomethingElse }
+};
+
+function configure(values) {
+    for (var key in fields) {
+        if (typeof values[key] !== 'undefined') {
+            fields[key].validator(values[key]);
+            config[key] = values[key];
+        } else {
+            config[key] = fields[key].default;
+        }
+    }
+    return config;
+}

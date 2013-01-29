@@ -1,0 +1,11 @@
+console = Y.Mock();
+testLogHandler: function () {
+    var sev = 'DEBUG', message = 'TEST';
+    Y.Mock.expect(console, { method: log
+        , arguments: [ sev, message ] });
+    hub.fire('log', sev, message);
+
+    this.wait(function() {
+        Y.Mock.verify(console);
+    }, 1000);
+}

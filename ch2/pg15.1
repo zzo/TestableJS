@@ -1,0 +1,24 @@
+function configure(values) {
+    var config = { docRoot: '/somewhere' }
+    , key
+;
+
+    for (key in values) {
+        config[key] = values[key];
+    }
+
+    return config;
+}
+
+function validateDocRoot(config) {
+    var fs = require('fs')
+    , stat
+;
+
+    stat = fs.statSync(config.docRoot);
+    if (!stat.isDirectory()) {
+        throw new Error('Is not valid');
+    }
+}
+
+function validateSomethingElse(config) { ... }

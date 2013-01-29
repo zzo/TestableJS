@@ -1,0 +1,21 @@
+var webdriverjs = require("webdriverjs")
+    , url = '...'
+    , browser = webdriverjs.remote({
+        host: 'localhost'
+        , port: 4444
+        , desiredCapabilities: { browserName: 'firefox' }
+    })
+;
+
+browser.init().url(url).waitFor('#testresults', 10000, function(found) {
+    var res;
+    if (found) {
+        res = browser.getText('#testresults',
+        function(text) {
+            // Do something smarter than console.log!
+            console.log(JSON.parse(unescape(text.value)));
+        });
+    } else {
+        console.log('TEST RESULTS NOT FOUND');
+    }
+}).end();

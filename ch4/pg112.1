@@ -1,0 +1,11 @@
+it("Adds By Param!", function() {
+
+    var params = [ 8, 4 ]
+        , expected = 12
+    ;
+
+    spyOn(mySum, 'getByParam').andCallThrough();
+    expect(mySum.sum(mySum.getByParam, params)).toEqual(expected);
+    expect(mySum.getByParam).toHaveBeenCalled();
+    expect(mySum.getByParam.mostRecentCall.args).toEqual(params);
+});

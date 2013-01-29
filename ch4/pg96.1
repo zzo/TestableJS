@@ -1,0 +1,24 @@
+YUI({
+    logInclude: { TestRunner: true },
+}).use('test', 'sum', 'console', 'phantomjs', function(Y) {
+    var suite = new Y.Test.Suite('sum');
+    suite.add(new Y.Test.Case({
+        name:'simple test',
+        testIntAdd : function () {
+            Y.log('testIntAdd');
+            Y.Assert.areEqual(Y.MySum(2 ,2), 4);
+        }
+        , testStringAdd : function () {
+            Y.log('testStringAdd');
+            Y.Assert.areEqual(Y.MySum('my', 'sum'), 'mysum');
+        }
+    }));
+
+    Y.Test.Runner.add(suite);
+    //Initialize the console
+    var yconsole = new Y.Console({
+        newestOnTop: false
+    });
+    yconsole.render('#log');
+    Y.Test.Runner.run();
+});

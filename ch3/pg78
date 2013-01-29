@@ -1,0 +1,11 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/clients/browser/jquery.js"></script>
+<script>
+    var hub = new $.fn.eventHub(io, 'http://myhost:5883');
+    hub.bind('eventHubReady', function() {
+    hub.bind('ADD_USER_DONE', function(data) { });
+        ... TIME PASSES ...
+        hub.trigger('ADD_USER', user);
+    });
+</script>

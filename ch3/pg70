@@ -1,0 +1,29 @@
+YUI().use('test', function(Y) {
+    var eventHub = Y.Mock()
+        , addUserTests = new Y.Test.Case({
+            name: 'add user'
+            , addOne: function() {
+                var user = { user_id: 'mark' }
+                    , dbHandle = { // DB stub
+                        addRow: function(user) {
+                            return { user: user
+                                , success: true
+                                , message: 'ok' };
+                        }
+                    }
+                ;
+
+                DB(eventHub, dbHandle); // Inject test versions
+                Y.Mock.expect(eventHub, 'fire', {
+                    'USER_CREATED'
+                    , { success: true: message: 'ok', user: user }
+                });
+
+                addUser(user);
+                Y.Mock.verify(eventHub);
+            }
+
+            Y.Test.Runner.add(addUserTests);
+            Y.Test.Runner.run();
+        });
+});

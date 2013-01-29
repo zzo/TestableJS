@@ -1,0 +1,16 @@
+it("Adds Strings!", function() {
+    var filename = "strings"
+        , fsMock = {
+            readFileSync: function (path, encoding) {
+                expect(path).toEqual(filename);
+                expect(encoding).toEqual('utf8');
+                return JSON.stringify({ a: 'testable' , b: 'JavaScript' });
+            }
+        }
+    ;
+
+    mockery.registerMock('fs', fsMock);
+    var mySum = require('./mySumFS');
+    expect(mySum.sum(filename)).toEqual('testableJavaScript');
+    mockery.deregisterMock('fs');
+});

@@ -1,0 +1,40 @@
+var testCase = new Y.Test.Case({
+    name: "test ajax login"
+    , tearDown: function() {
+        Y.io = realIO;
+    }
+    , testLogin : function () {
+        var username = 'mark'
+            , password = 'rox'
+        ;
+
+        Y.io = getFakeIO({
+            url: '/login'
+            , data: JSON.stringify({
+                username: username
+                , password: password
+            })
+            , method: 'POST'
+            , responseArg: {
+                status: 200
+                , responseText: JSON.stringify({ loginOk: true })
+            }
+        });
+    
+        userLoggedIn = function(user) {
+            Y.Assert.areEqual(user, username); 
+        };
+    
+        failedLogin = function() {
+            Y.Assert.fail('login should have succeeded!'); 
+        };
+    
+        networkError = function() {
+            Y.Assert.fail('login should have succeeded!'); 
+        };
+    
+        Y.one('#username').set('value', username);
+        Y.one('#password').set('value', password);
+        Y.one('#submitButton').simulate('click');
+    }
+});

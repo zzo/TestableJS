@@ -1,0 +1,10 @@
+/**
+* This function accepts two operands, 'a' and 'b' and returns their
+* sum (or concatenation if they are strings)
+*/
+exports.sum = function(a, b) { return a + b };
+/**
+* This function accepts two operands, 'a' and 'b' and
+* returns their product
+*/
+exports.mult = function(a, b) { return a * b };

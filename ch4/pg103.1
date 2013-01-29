@@ -1,0 +1,23 @@
+YUI().add('selenium', function(Y) {
+    var messages = [];
+        , yconsole = new Y.Console()
+    ;
+
+    yconsole.on('entry', function(obj) { messages.push(obj.message); });
+    var TR = Y.Test.Runner;
+    TR.subscribe(TR.COMPLETE_EVENT, function(obj) {
+        // Data to dump
+        var data = escape(JSON.stringify(
+            {
+                messages: messages
+                , results: Y.Test.Format.JUnitXML(obj.results)
+            }
+        ));
+
+        // Create a new Node
+        var item = Y.Node.create('<div id="testresults"></div>');
+        item.setContent(data);
+        // Append to document
+        Y.one('body').append(item);
+    });
+}, '1.0', { requires: [ 'console', 'node' ] });

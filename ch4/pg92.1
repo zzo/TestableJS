@@ -1,0 +1,18 @@
+testAddOk: function() {
+    var shoppingCart = new ShoppingCart()
+        , item = { inStock: function() { return true; } }
+        , back = shoppingCart.addToShoppingCart(item)
+    ;
+
+    Y.Assert.areSame(back, item, "Item not returned");
+    Y.ArrayAssert.contains(item, "Item not pushed into cart!");
+}
+, testAddNok: function() {
+    var shoppingCart = new ShoppingCart()
+        , item = { inStock: function() { return false; } }
+        , back = shoppingCart.addToShoppingCart(item)
+    ;
+
+    Y.Assert.isNull(back, "Item returned is not null");
+    Y.ArrayAssert.isEmpty(shoppingCart.cart, "Cart not empty!");
+}

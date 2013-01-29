@@ -1,0 +1,36 @@
+describe("test make dinner injected", function() {
+    it("cooked dinner", function() {
+        this.addMatchers({
+            toBeYummy: function(expected) {
+                return this.actual.attr.isCooked && this.actual.attr.isMixed;
+            }
+        });
+
+        var ingredients = ['parsley', 'salt']
+            , chicken = {}
+            , mixer = {
+                mix: function(chick, ings) {
+                    expect(ingredients).toBe(ings);
+                    expect(chicken).toBe(chick);
+                    return { attr: { isMixed: true } };
+                }
+            }
+            , MockedCooker = function() {}
+        ;
+        MockedCooker.prototype = {
+            bake: function(food, deg, timer) {
+                expect(food.attr.isMixed).toBeTruthy();
+                food.attr.isCooked = true;
+                return food
+            }
+            , degrees_f: function(temp) { expect(temp).toEqual(350); }
+            , timer: function(time) {
+                expect(time).toEqual('50 minutes');
+            }
+        };
+        var cooker = new MockedCooker()
+            , dinner = makeChickenDinner(ingredients, cooker , chicken, mixer)
+        ;
+        expect(dinner).toBeYummy();
+    })
+});

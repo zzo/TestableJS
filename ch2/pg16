@@ -1,0 +1,9 @@
+describe("validate value1", function() {
+    it("accepts the correct value", function() {
+        // some expects
+    });
+
+    it("rejects the incorrect value", function() {
+        // some expects
+    });
+});

@@ -1,0 +1,13 @@
+YUI().use('test', 'console', 'node-event-simulate' , 'login', function(Y) {
+    // Factory for mocking Y.io
+    var getFakeIO = function(args) {
+        return function(url, config) {
+            Y.Assert.areEqual(url, args.url);
+            Y.Assert.areEqual(config.data, args.data);
+            Y.Assert.areEqual(config.method, args.method);
+            Y.Assert.isFunction(config.on.complete);
+            config.on.complete(1, args.responseArg);
+        };
+    }
+    , realIO = Y.io
+    ;

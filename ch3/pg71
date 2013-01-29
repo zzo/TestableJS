@@ -1,0 +1,12 @@
+var DB = function(dbHandle) {
+    this.handle = dbHandle;
+};
+
+DB.prototype.addUser = function(user) {
+    var result = dbHandle.addRow('user', user);
+    return {
+        success: result.success
+        , message: result.message
+        , user: user
+    };
+};

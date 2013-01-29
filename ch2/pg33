@@ -1,0 +1,10 @@
+function makeChickenDinner(ingredients) {
+    var chicken = new ChickenBreast()
+        , oven = new ConventionalOven()
+        , mixer = new Mixer()
+        , dish = mixer.mix(chicken, ingredients)
+    ;
+
+    return oven.bake(dish, new FDegrees(350), new Timer("50 minutes"));
+}
+var dinner = makeChickenDinner(ingredients);

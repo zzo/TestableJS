@@ -1,0 +1,17 @@
+var page = new WebPage();
+page.viewportSize = { width: 1024, height: 768 };
+page.onConsoleMessage = function(msg) {
+    console.log(msg);
+    setTimeout(function() {
+        page.render('output.png');
+        phantom.exit();
+    }, 500);
+};
+
+page.open(phantom.args[0], function (status) {
+    // Check for page load success
+    if (status !== "success") {
+        console.log("Unable to load file");
+        phantom.exit(1);
+    }
+});

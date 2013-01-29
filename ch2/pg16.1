@@ -1,0 +1,11 @@
+function configure(values) {
+    var config = { docRoot: '/somewhere' };
+    for (var key in values) {
+        config[key] = values[key];
+    }
+
+    validateDocRoot(config);
+    validateSomethingElse(config);
+    //...
+    return config;
+}

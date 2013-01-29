@@ -1,0 +1,12 @@
+page.onConsoleMessage = function(msg) {
+    var obj = JSON.parse(msg);
+    if (obj.results) {
+        window.setTimeout(function () {
+            console.log(obj.results);
+            page.render('output.png');
+            phantom.exit();
+        }, 200);
+    } else {
+        console.log(msg);
+    }
+};

@@ -1,0 +1,12 @@
+var page = new WebPage();
+page.onConsoleMessage = function(msg) {
+    console.log(msg);
+    phantom.exit(0);
+};
+page.open(phantom.args[0], function (status) {
+    // Check for page load success
+    if (status !== "success") {
+        console.log("Unable to load file");
+        phantom.exit(1);
+    }
+});

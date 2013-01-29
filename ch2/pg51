@@ -1,0 +1,22 @@
+/**
+* This function accepts two operands, 'a' and 'b' and returns
+* their sum (or concatenation if they are strings)
+*
+* @name sum
+* @function
+* @param {Number or String} a first operand
+* @param {Number or String} b second operand
+* @returns {Number or String} The 'summed' value
+*/
+exports.sum = function(a, b) { return a + b };
+/**
+* This function accepts two operands, 'a' and 'b' and returns
+* their product
+*
+* @name product
+* @function
+* @param {Number} a first operand
+* @param {Number} b second operand
+* @returns {Number} The product
+*/
+exports.mult = function(a, b) { return a * b };

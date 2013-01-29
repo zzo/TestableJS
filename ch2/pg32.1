@@ -1,0 +1,29 @@
+YUI.use('mySubModule', function(Y) {
+    var mySubModule = function() {
+        this.a = new Y.A();
+        this.b = new Y.B();
+        this.c = new Y.C();
+        this.d = new Y.D();
+        };
+
+    mySubModule.prototype.getA = function() { return this.a; };
+    mySubModule.prototype.getB = function() { return this.b; };
+    mySubModule.prototype.getC = function() { return this.c; };
+    mySubModule.prototype.getD = function() { return this.d; };
+    Y.MySubModule = mySubModule;
+}, { requires: [ 'a', 'b', 'c', 'd'] });
+
+YUI.use('myModule', function(Y) {
+    var myModule = function() {
+        var sub = new Y.MySubModule();
+        this.a = sub.getA();
+        this.b = sub.getB();
+        this.c = sub.getC();
+        this.d = sub.getD();
+        this.e = new Y.E();
+        this.f = new Y.F();
+        this.g = new Y.G();
+        this.h = new Y.H();
+    };
+    Y.MyModule = myModule;
+}, { requires: [ 'mySubModule', 'e', 'f', 'g', 'h' ] });

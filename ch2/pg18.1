@@ -1,0 +1,9 @@
+var myObject = new Obj();
+try {
+    myObject.setDocRoot('/somewhere/else');
+} catch(e) {
+    // something wrong with my new doc root
+    // old value of docRoot still there
+}
+// all is OK
+console.log(myObject.getDocRoot());

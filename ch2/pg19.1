@@ -1,0 +1,9 @@
+describe("validate docRoot", function() {
+    var config = new Obj();
+    it("throw if docRoot does not exist", function() {
+        expect(config.validateDocRoot.bind(config, '/xxx')).toThrow();
+    });
+    it("not throw if docRoot does exist", function() {
+        expect(config.validateDocRoot.bind(config, '/tmp')).not.toThrow();
+    });
+});
