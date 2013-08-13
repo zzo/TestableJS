@@ -4,7 +4,7 @@ var Proxy = require('browsermob-proxy').Proxy
 ;
 
 var proxy = new Proxy();
-proxy.selHAR('MyCoolHARFile', doCasperJSStuff, function(err, data) {
+proxy.cbHAR('MyCoolHARFile', doCasperJSStuff, function(err, data) {
     if (err) {
         console.error('ERR: ' + err);
     } else {

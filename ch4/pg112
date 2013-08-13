@@ -1,12 +1,12 @@
 mySum = require('./mySumFunc');
 describe("Sum suite Functions", function() {
     it("Adds By Param!", function() {
-        var sum = mySum.sum(mySum.getByParam, [6,6]));
+        var sum = mySum.sum(mySum.getByParam, [6,6]);
         expect(sum).toEqual(12);
     });
 
     it("Adds By File!", function() {
-        var sum = mySum.sum(mySum.getByFile, ["strings"]));
+        var sum = mySum.sum(mySum.getByFile, ["strings"]);
         expect(sum).toEqual("testableJavaScript");
     });
 });

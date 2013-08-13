@@ -4,6 +4,7 @@ var fields {
 };
 
 function configure(values) {
+    var config = {};
     for (var key in fields) {
         if (typeof values[key] !== 'undefined') {
             fields[key].validator(values[key]);

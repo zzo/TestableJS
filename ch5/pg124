@@ -3,5 +3,5 @@ var tempFile = PATH.join(coverageBase, PATH.basename(file));
 ;
 exec('java -jar ' + coverageJar + " -o " + tempFile + " " + realFile
     , function(err) {
-        FILES_FOR_COVERAGE[keep] = 1;
+        COVERAGE_ME[file] = 1;
 });
