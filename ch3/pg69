@@ -1,8 +1,11 @@
 // Some handle to a datastore
 function DB(eventHub, dbHandle) {
     // Add user function
-    eventHub.on('CREATE_USER', addUser);
-    function addUser(user) {
+    eventHub.on('CREATE_USER', createAddUserHandler(eventHub, dbHandle));
+} 
+
+function createAddUserHandler(eventHub, dbHandle) {
+    return function addUser(user) {
         var result = dbHandle.addRow('user', user);
         eventHub.fire('USER_CREATED', {
             success: result.success
@@ -10,4 +13,6 @@ function DB(eventHub, dbHandle) {
             , user: user
         });
     }
-} 
+}
+
+
